@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ Copyright (c) 18-12-3 上午1:11 toxic
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- 不使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.toxic.auth.mapper.RolePermissionMapper">
+	<resultMap id="rolePermissionResultMap" type="com.toxic.auth.model.RolePermission">
+        <result property="id" column="id"/>
+        <result property="roleId" column="role_id"/>
+        <result property="permissionId" column="permission_id"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="RolePermissionColumns">
+	    <![CDATA[
+		id,role_id,permission_id
+	    ]]>
+	</sql>
+
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+    <![CDATA[
+        INSERT INTO t_role_permission (
+        	id ,
+        	role_id ,
+        	permission_id 
+        ) VALUES (
+        	#{id,jdbcType=INTEGER},
+        	#{roleId,jdbcType=VARCHAR},
+        	#{permissionId,jdbcType=VARCHAR}
+        )
+    ]]>
+		<!--
+			oracle: order="BEFORE" SELECT sequenceName.nextval AS ID FROM DUAL 
+			DB2: order="BEFORE"" values nextval for sequenceName
+		<selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="userId">
+			SELECT sequenceName.nextval AS ID FROM DUAL 
+        </selectKey>
+		-->
+	</insert>
+    
+	<update id="update" >
+        UPDATE t_role_permission SET
+	        <if test="roleId!=null">
+	        role_id = #{roleId,jdbcType=VARCHAR} ,
+	        </if>
+	        <if test="permissionId!=null">
+	        permission_id = #{permissionId,jdbcType=VARCHAR} ,
+	        </if>
+        WHERE 
+	        id = #{id} 
+	</update>
+
+    <delete id="delete">
+    <![CDATA[
+        DELETE FROM t_role_permission WHERE
+        id = #{id} 
+    ]]>
+    </delete>
+    
+    <select id="getById" resultMap="rolePermissionResultMap">
+		SELECT <include refid="RolePermissionColumns" />
+	    <![CDATA[
+		    FROM t_role_permission 
+	        WHERE 
+		        id = #{id} 
+	    ]]>
+	</select>
+	
+	<sql id="listRolePermissionWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>      				
+	       	<!--<if test="keyWord!=null and keyWord!=''">-->
+				<!--AND (id like CONCAT(CONCAT('%', #{keyWord}),'%') or id like CONCAT(CONCAT('%', #{keyWord}),'%'))-->
+			<!--</if>-->
+	       	<if test="id!=null and id!=''">
+				AND id = #{id}
+			</if>
+	       	<if test="roleId!=null and roleId!=''">
+				AND role_id = #{roleId}
+			</if>
+	       	<if test="permissionId!=null and permissionId!=''">
+				AND permission_id = #{permissionId}
+			</if>
+		</where>
+	</sql>
+		
+    <select id="getCountRolePermission" resultType="int">
+        SELECT count(*) FROM t_role_permission 
+		<include refid="listRolePermissionWhere"/>
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="selectList" resultMap="rolePermissionResultMap">
+    	SELECT <include refid="RolePermissionColumns" />
+	    FROM t_role_permission 
+		<include refid="listRolePermissionWhere"/>
+    </select>
+	<!--该方法适用于，获取的数据条数小于等于1 如有特殊需要自己实现-->
+	<select id="selectOne" resultMap="rolePermissionResultMap">
+		SELECT <include refid="RolePermissionColumns" />
+		FROM t_role_permission
+		<include refid="listRolePermissionWhere"/>
+	</select>
+
+
+</mapper>
+
