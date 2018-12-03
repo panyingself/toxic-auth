@@ -55,19 +55,23 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/fonts/**", "anon");
         filterChainDefinitionMap.put("/imgs/**", "anon");
         filterChainDefinitionMap.put("/js/**", "anon");
-        filterChainDefinitionMap.put("/auth/**", "anon");
-        filterChainDefinitionMap.put("/errorPage/**", "anon");
-        filterChainDefinitionMap.put("/demo/**", "anon");
-        filterChainDefinitionMap.put("/swagger-*/**", "anon");
-        filterChainDefinitionMap.put("/swagger-ui.html/**", "anon");
-        filterChainDefinitionMap.put("/webjars/**", "anon");
-        filterChainDefinitionMap.put("/v2/**", "anon");
-        filterChainDefinitionMap.put("/admin/**", "roles[admin]");// 表示admin角色权限才可以访问，多个加引号用逗号相隔
-//        filterChainDefinitionMap.put("/permission/**", "roles[admin]");// 表示admin权限才可以访问，多个加引号用逗号相隔
-        filterChainDefinitionMap.put("/permission/**", "perms[admin]");// 表示admin菜单权限才可以访问，多个加引号用逗号相隔
-        filterChainDefinitionMap.put("/*", "authc");// 表示需要认证才可以访问
-        filterChainDefinitionMap.put("/**", "authc");
-        filterChainDefinitionMap.put("/*.*", "authc");
+        filterChainDefinitionMap.put("/index/**", "anon");
+        filterChainDefinitionMap.put("/user/**", "anon");
+//        filterChainDefinitionMap.put("/static/plugin/**", "anon");
+//        filterChainDefinitionMap.put("/static/**", "anon"); // 表示可以匿名访问
+//        filterChainDefinitionMap.put("/auth/**", "anon");
+//        filterChainDefinitionMap.put("/errorPage/**", "anon");
+//        filterChainDefinitionMap.put("/demo/**", "anon");
+//        filterChainDefinitionMap.put("/swagger-*/**", "anon");
+//        filterChainDefinitionMap.put("/swagger-ui.html/**", "anon");
+//        filterChainDefinitionMap.put("/webjars/**", "anon");
+//        filterChainDefinitionMap.put("/v2/**", "anon");
+//        filterChainDefinitionMap.put("/admin/**", "roles[admin]");// 表示admin角色权限才可以访问，多个加引号用逗号相隔
+////        filterChainDefinitionMap.put("/permission/**", "roles[admin]");// 表示admin权限才可以访问，多个加引号用逗号相隔
+//        filterChainDefinitionMap.put("/permission/**", "perms[admin]");// 表示admin菜单权限才可以访问，多个加引号用逗号相隔
+//        filterChainDefinitionMap.put("/*", "authc");// 表示需要认证才可以访问
+//        filterChainDefinitionMap.put("/**", "authc");
+//        filterChainDefinitionMap.put("/*.*", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }
