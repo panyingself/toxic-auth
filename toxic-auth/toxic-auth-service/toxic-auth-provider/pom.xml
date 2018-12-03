@@ -4,12 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>com.toxic</groupId>
-        <artifactId>toxic.auth.parent</artifactId>
+        <artifactId>toxic-auth-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>toxic.auth.provider</artifactId>
+    <artifactId>toxic-auth-provider</artifactId>
 
     <dependencies>
         <!--springboot start-->
@@ -80,7 +80,7 @@
         <!--业务依赖-->
         <dependency>
             <groupId>com.toxic</groupId>
-            <artifactId>toxic.auth.api</artifactId>
+            <artifactId>toxic-auth-api</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

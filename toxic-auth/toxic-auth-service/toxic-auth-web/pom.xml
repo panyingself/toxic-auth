@@ -6,12 +6,12 @@
 
     <parent>
         <groupId>com.toxic</groupId>
-        <artifactId>toxic.auth.parent</artifactId>
+        <artifactId>toxic-auth-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
     <groupId>com.toxic</groupId>
-    <artifactId>toxic.auth.web</artifactId>
+    <artifactId>toxic-auth-web</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
@@ -34,6 +34,14 @@
             <version>${springboot.version}</version>
         </dependency>
         <!--springboot end-->
+
+        <!-- 支持freemarker作为模板引擎 start -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+            <version>1.4.3.RELEASE</version>
+        </dependency>
+        <!-- 支持freemarker作为模板引擎 end -->
 
         <!--shiro start-->
         <dependency>
@@ -94,7 +102,7 @@
         <!--business start-->
         <dependency>
             <groupId>com.toxic</groupId>
-            <artifactId>toxic.auth.provider</artifactId>
+            <artifactId>toxic-auth-provider</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <!--business end-->
@@ -105,6 +113,16 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!--解决每次自动充值java compiler问题-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>
