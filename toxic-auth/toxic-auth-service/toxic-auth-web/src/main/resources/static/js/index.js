@@ -17,7 +17,8 @@ layui.use(['element', 'layer','form','jquery'], function(){
             //固定当前活动页
             $(".layui-nav-tree").find("a").removeClass("active");
             hs.addClass("active");
-            $("#api-main").load("/user/queryList");
+            console.log($(this).attr("value"))
+            $("#api-main").load($(this).attr("value"));
         }else{
 
         }

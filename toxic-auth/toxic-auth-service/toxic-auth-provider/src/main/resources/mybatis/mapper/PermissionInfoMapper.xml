@@ -80,10 +80,10 @@
 	        parent_id = #{parentId,jdbcType=VARCHAR} ,
 	        </if>
 	        <if test="parentIds!=null">
-	        parent_ids = #{parentIds,jdbcType=VARCHAR} ,
+	        parent_ids = #{parentIds,jdbcType=VARCHAR}
 	        </if>
         WHERE 
-	        id = #{id} 
+	        resource_id = #{resourceId}
 	</update>
 
     <delete id="delete">

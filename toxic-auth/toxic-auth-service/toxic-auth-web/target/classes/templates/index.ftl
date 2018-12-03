@@ -52,7 +52,16 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;">功能分组</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">用户管理</a></dd>
+                        <dd><a href="javascript:;" value="/user/queryList">用户管理</a></dd>
+                    </dl>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" value="/role/queryList">角色管理</a></dd>
+                    </dl>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" value="/permission/queryList">权限管理</a></dd>
+                    </dl>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" value="/permissionconfig/queryList">权限配置</a></dd>
                     </dl>
                 </li>
             </ul>
