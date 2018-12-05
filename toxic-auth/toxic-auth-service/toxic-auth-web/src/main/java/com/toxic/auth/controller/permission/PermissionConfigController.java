@@ -4,8 +4,11 @@
 
 package com.toxic.auth.controller.permission;
 
+import com.alibaba.fastjson.JSON;
 import com.toxic.auth.business.permission.PermissionBusiness;
 import com.toxic.auth.model.PermissionInfo;
+import com.toxic.auth.vo.ChildrenVo;
+import com.toxic.auth.vo.PermissionVo;
 import com.toxic.auth.vo.ResultVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Title:
@@ -30,6 +35,15 @@ public class PermissionConfigController {
     @RequestMapping(value = "/queryList")
     public String topermissionList(Model model){
         model.addAttribute("permissionList",permissionBusiness.getAllPermissionInfo());
+        PermissionVo permissionVo = new PermissionVo();
+        permissionVo.setName("test");
+        permissionVo.setOpen(true);
+        ChildrenVo childrenVo = new ChildrenVo();
+        childrenVo.setName("test");
+        List<ChildrenVo> childrenVoList = new ArrayList<>();
+        childrenVoList.add(childrenVo);
+        permissionVo.setChildren(childrenVoList);
+        model.addAttribute("data", JSON.toJSONString(permissionVo));
         return "permissionconifg/permission_config_list";
     }
 

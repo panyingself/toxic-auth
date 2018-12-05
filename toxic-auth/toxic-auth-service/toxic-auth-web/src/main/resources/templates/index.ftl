@@ -6,7 +6,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="${request.contextPath}/plugin/layui/css/layui.css"  media="all">
+    <link rel="stylesheet" href="${request.contextPath}/js/layui/css/layui.css"  media="all">
     <#--<link rel="stylesheet" href="http://res.layui.com/layui/dist/css/modules/layer/default/layer.css?v=3.1.1">-->
     <#--<link rel="stylesheet" href="//res.layui.com/layui/dist/css/layui.css?t=1535557734124" media="all">-->
     <#--<link rel="stylesheet" href="layui/css/modules/layer/default/layer.css">-->
@@ -88,7 +88,7 @@
     </div>
 </div>
 <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="${request.contextPath}/plugin/layui/layui.js"></script>
+<script src="${request.contextPath}/js/layui/layui.all.js"></script>
 <script src="${request.contextPath}/js/index.js"></script>
 </body>
 </html>
