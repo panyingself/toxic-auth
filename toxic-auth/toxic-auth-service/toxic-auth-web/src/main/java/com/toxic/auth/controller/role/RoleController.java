@@ -28,15 +28,15 @@ public class RoleController {
     @Resource
     private RoleBusiness roleBusiness;
     @RequestMapping(value = "/queryList")
-    public String toUserList(Model model){
-        model.addAttribute("userList",roleBusiness.getAllRoleInfo());
-        return "user/user_list";
+    public String toroleList(Model model){
+        model.addAttribute("roleList",roleBusiness.getAllRoleInfo());
+        return "role/role_list";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public String toEdit(Model model,String id){
-        model.addAttribute("user",roleBusiness.getRoleInfoByid(id));
-        return "user/user_edit";
+        model.addAttribute("role",roleBusiness.getRoleInfoByid(id));
+        return "role/role_edit";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
@@ -50,20 +50,20 @@ public class RoleController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
-    public ResultVo addUser(RoleInfo RoleInfo){
+    public ResultVo addrole(RoleInfo RoleInfo){
         ResultVo resultVo = new ResultVo();
         roleBusiness.insertRoleInfo(RoleInfo);
         return new ResultVo();
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public String toAddUser(RoleInfo RoleInfo){
-        return "user/user_add";
+    public String toAddrole(RoleInfo RoleInfo){
+        return "role/role_add";
     }
 
     @RequestMapping(value = "/delete")
     @ResponseBody
-    public ResultVo deleteUser(Long id){
+    public ResultVo deleterole(Long id){
         roleBusiness.deleteRoleInfo(id);
         return new ResultVo();
     }

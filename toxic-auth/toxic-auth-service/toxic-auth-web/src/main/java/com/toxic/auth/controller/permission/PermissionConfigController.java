@@ -6,9 +6,8 @@ package com.toxic.auth.controller.permission;
 
 import com.alibaba.fastjson.JSON;
 import com.toxic.auth.business.permission.PermissionBusiness;
+import com.toxic.auth.business.role.RoleBusiness;
 import com.toxic.auth.model.PermissionInfo;
-import com.toxic.auth.vo.ChildrenVo;
-import com.toxic.auth.vo.PermissionVo;
 import com.toxic.auth.vo.ResultVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Title:
@@ -32,53 +29,28 @@ import java.util.List;
 public class PermissionConfigController {
     @Resource
     private PermissionBusiness permissionBusiness;
+    @Resource
+    private RoleBusiness roleBusiness;
+
     @RequestMapping(value = "/queryList")
-    public String topermissionList(Model model){
-        model.addAttribute("permissionList",permissionBusiness.getAllPermissionInfo());
-        PermissionVo permissionVo = new PermissionVo();
-        permissionVo.setName("test");
-        permissionVo.setOpen(true);
-        ChildrenVo childrenVo = new ChildrenVo();
-        childrenVo.setName("test");
-        List<ChildrenVo> childrenVoList = new ArrayList<>();
-        childrenVoList.add(childrenVo);
-        permissionVo.setChildren(childrenVoList);
-        model.addAttribute("data", JSON.toJSONString(permissionVo));
+    public String topermissionList(Model model) {
+//        model.addAttribute("znodes", JSON.toJSONString(permissionBusiness.getAllZnodeListInfo("0001")));
+        model.addAttribute("roles", roleBusiness.getAllRoleInfo());
         return "permissionconifg/permission_config_list";
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public String toEdit(Model model,String id){
-        model.addAttribute("permission",permissionBusiness.getPermissionInfoByid(id));
+    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    public String toEdit(Model model, String id) {
+        model.addAttribute("permission", permissionBusiness.getPermissionInfoByid(id));
         return "permission/permission_edit";
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/queryPermissionListByRoleId", method = RequestMethod.POST)
     @ResponseBody
-    public ResultVo realEdit(PermissionInfo PermissionInfo){
-        ResultVo resultVo = new ResultVo();
-        int row = permissionBusiness.updatePermissionInfo(PermissionInfo);
-        resultVo.setData(row);
-        return resultVo;
-    }
-
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    @ResponseBody
-    public ResultVo addpermission(PermissionInfo PermissionInfo){
-        ResultVo resultVo = new ResultVo();
-        permissionBusiness.insertPermissionInfo(PermissionInfo);
-        return new ResultVo();
-    }
-
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public String toAddpermission(PermissionInfo PermissionInfo){
-        return "permission/permission_add";
-    }
-
-    @RequestMapping(value = "/delete")
-    @ResponseBody
-    public ResultVo deletepermission(Long id){
-        permissionBusiness.deletePermissionInfo(id);
-        return new ResultVo();
+    public String realEdit(String roleId) {
+        String znodes = JSON.toJSONString(permissionBusiness.getAllZnodeListInfo(roleId));
+        return znodes;
     }
 }
+
+

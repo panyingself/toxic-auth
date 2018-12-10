@@ -3,24 +3,54 @@
 	<link rel="stylesheet" href="${request.contextPath}/js/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
 	<script type="text/javascript" src="${request.contextPath}/js/ztree/js/jquery-1.4.4.min.js"></script>
 	<script type="text/javascript" src="${request.contextPath}/js/ztree/js/jquery.ztree.core.js"></script>
-  <SCRIPT LANGUAGE="JavaScript">
-      var zTreeObj;
-      // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
-      var setting = {};
-      // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
-      var zNodes = [
-          {name:"test1", open:true, children:[
-                  {name:"test1_1"}, {name:"test1_2"}]},
-          {name:"test2", open:true, children:[
-                  {name:"test2_1"}, {name:"test2_2"}]}
-      ];
-      $(document).ready(function(){
-          zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, ${data});
-      });
+    <script type="text/javascript" src="${request.contextPath}/js/ztree/js/jquery.ztree.excheck.js"></script>
+  <SCRIPT type="text/javascript">
+      <#--var setting = {-->
+          <#--check: {-->
+              <#--enable: true-->
+          <#--},-->
+          <#--data: {-->
+              <#--simpleData: {-->
+                  <#--enable: true-->
+              <#--}-->
+          <#--}-->
+      <#--};-->
+      <#--$(document).ready(function(){-->
+          <#--$.fn.zTree.init($("#treeDemo"), setting, ${znodes});-->
+      <#--});-->
   </SCRIPT>
- </HEAD>
+</HEAD>
+
 <BODY>
-<div>
-    <ul id="treeDemo" class="ztree"></ul>
+<h1>权限勾选操作</h1>
+<br>
+
+<hr class="layui-bg-green">
+<div class="layui-row layui-col-space1">
+    <#if roles?? && (roles?size > 0 ) >
+        <#list roles as role>
+            <div class="layui-col-md2">
+                <div class="grid-demo grid-demo-bg1">
+                    <button class="layui-btn layui-btn-radius" id="${role.roleId}" onclick="selectRole('${role.roleId}')">${role.roleName}</button>
+                </div>
+            </div>
+        </#list>
+    </#if>
 </div>
+
+<br>
+<hr class="layui-bg-green">
+
+<div class="content_wrap">
+    <div class="zTreeDemoBackground left">
+        <ul id="treeDemo" class="ztree"></ul>
+    </div>
+</div>
+
+<br>
+<hr class="layui-bg-green">
+<br>
+<button class="layui-btn layui-btn-radius" onclick="py()">修改</button>
+
 </BODY>
+<script type="text/javascript" src="${request.contextPath}/js/permission/permission_config_list.js"></script>
