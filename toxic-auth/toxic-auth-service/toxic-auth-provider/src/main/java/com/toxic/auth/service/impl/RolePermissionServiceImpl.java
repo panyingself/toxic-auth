@@ -9,24 +9,27 @@
 
 package com.toxic.auth.service.impl;
 
-import java.util.List;
-import javax.annotation.Resource;
-
-import com.toxic.auth.service.RolePermissionService;
-import org.springframework.stereotype.Service;
 import com.github.pagehelper.PageHelper;
+import com.toxic.auth.mapper.RolePermissionMapper;
+import com.toxic.auth.model.RolePermission;
+import com.toxic.auth.model.query.RolePermissionQuery;
 import com.toxic.auth.page.Page;
+import com.toxic.auth.service.RolePermissionService;
 import com.toxic.auth.service.impl.base.BaseServiceImpl;
-import com.toxic.auth.model.*;
-import com.toxic.auth.mapper.*;
-import com.toxic.auth.model.*;
-import com.toxic.auth.model.query.*;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class RolePermissionServiceImpl extends BaseServiceImpl<RolePermission,Integer> implements RolePermissionService {
 	@Resource
 	private RolePermissionMapper rolePermissionMapper;
 
+	@Override
+	public void deleteByResourceId(String resouceId) {
+		rolePermissionMapper.deleteByResourceId(resouceId);
+	}
 
 	public List<RolePermission> queryList(RolePermissionQuery rolePermissionQuery){
 		return rolePermissionMapper.selectList(rolePermissionQuery);

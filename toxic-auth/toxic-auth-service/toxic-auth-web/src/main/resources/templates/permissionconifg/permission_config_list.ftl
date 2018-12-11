@@ -31,7 +31,7 @@
         <#list roles as role>
             <div class="layui-col-md2">
                 <div class="grid-demo grid-demo-bg1">
-                    <button class="layui-btn layui-btn-radius" id="${role.roleId}" onclick="selectRole('${role.roleId}')">${role.roleName}</button>
+                    <button class="layui-btn layui-btn-radius" id="${role.roleId}" onclick="selectRole('${role.roleId}')" btnactive="false" value="'${role.roleId}'">${role.roleName}</button>
                 </div>
             </div>
         </#list>

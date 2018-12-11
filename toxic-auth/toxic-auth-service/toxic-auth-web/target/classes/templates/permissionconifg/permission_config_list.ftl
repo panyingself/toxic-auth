@@ -31,7 +31,7 @@
         <#list roles as role>
             <div class="layui-col-md2">
                 <div class="grid-demo grid-demo-bg1">
-                    <button class="layui-btn layui-btn-radius" id="${role.roleId}" onclick="selectRole('${role.roleId}')">${role.roleName}</button>
+                    <button class="layui-btn layui-btn-radius" id="${role.roleId}" onclick="selectRole('${role.roleId}')" btnactive="false" value="'${role.roleId}'">${role.roleName}</button>
                 </div>
             </div>
         </#list>
@@ -45,7 +45,12 @@
     <div class="zTreeDemoBackground left">
         <ul id="treeDemo" class="ztree"></ul>
     </div>
-    <button onclick="py()">test</button>
 </div>
+
+<br>
+<hr class="layui-bg-green">
+<br>
+<button class="layui-btn layui-btn-radius" onclick="py()">修改</button>
+
 </BODY>
 <script type="text/javascript" src="${request.contextPath}/js/permission/permission_config_list.js"></script>

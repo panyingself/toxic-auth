@@ -34,15 +34,15 @@ public class PermissionConfigController {
 
     @RequestMapping(value = "/queryList")
     public String topermissionList(Model model) {
-//        model.addAttribute("znodes", JSON.toJSONString(permissionBusiness.getAllZnodeListInfo("0001")));
         model.addAttribute("roles", roleBusiness.getAllRoleInfo());
         return "permissionconifg/permission_config_list";
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
-    public String toEdit(Model model, String id) {
-        model.addAttribute("permission", permissionBusiness.getPermissionInfoByid(id));
-        return "permission/permission_edit";
+    @RequestMapping(value = "/updatePermissionListByRoleId", method = RequestMethod.POST)
+    @ResponseBody
+    public String toEdit( String roleId,String[] permissionIds) {
+        String znodes = JSON.toJSONString(permissionBusiness.updateAllZnodeListInfo(permissionIds,roleId));
+        return znodes;
     }
 
     @RequestMapping(value = "/queryPermissionListByRoleId", method = RequestMethod.POST)

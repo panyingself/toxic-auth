@@ -62,6 +62,13 @@
         id = #{id} 
     ]]>
     </delete>
+
+	<delete id="deleteByResourceId">
+		<![CDATA[
+        DELETE FROM t_role_permission WHERE
+        permissionId = #{resourceId}
+    ]]>
+	</delete>
     
     <select id="getById" resultMap="rolePermissionResultMap">
 		SELECT <include refid="RolePermissionColumns" />
