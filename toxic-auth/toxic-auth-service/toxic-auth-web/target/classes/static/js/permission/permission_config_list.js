@@ -43,7 +43,7 @@ function py() {
 function selectRole(roleId) {
     alert(roleId)
     //step1 获取选中id的权限信息
-    $(".layui-btn layui-btn-radius").attr("btnActive","false");
+    $(".layui-btn").attr("btnActive","false");
     $("#"+roleId).attr("btnActive","true");
     $.ajax({
         type: "POST",

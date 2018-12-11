@@ -64,10 +64,8 @@
     </delete>
 
 	<delete id="deleteByResourceId">
-		<![CDATA[
-        DELETE FROM t_role_permission WHERE
-        permissionId = #{resourceId}
-    ]]>
+        DELETE FROM t_role_permission
+        <include refid="listRolePermissionWhere"/>
 	</delete>
     
     <select id="getById" resultMap="rolePermissionResultMap">

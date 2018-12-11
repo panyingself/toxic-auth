@@ -15,6 +15,6 @@ import com.toxic.auth.model.*;
 
 @Mapper
 public interface RolePermissionMapper extends BaseMapper<RolePermission> {
-    void deleteByResourceId(String resourceId);
+    void deleteByResourceId( RolePermission rolePermission);
 
 }

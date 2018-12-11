@@ -174,10 +174,17 @@ public class PermissionBusiness {
             //step2.2 原来的list和idIncludList做比对操作,如果元素相同则不做变化,如果adminPermissionInfoList大于idIncludList,将大于的部分方法list5,list5做删除操作
             if( adminPermissionInfoList.size() > idIncludList.size()){
                 for( PermissionInfo permissionInfo : adminPermissionInfoList ){
+                    int count = 0;
                     for( String id : idIncludList ){
-                        if( !permissionInfo.getResourceId().equals(id)){
-                                rolePermissionService.deleteByResourceId(id);
+                        if( permissionInfo.getResourceId().equals(id)){
+                            count++;
                         }
+                    }
+                    if( count == 0 ){
+                        RolePermission rolePermission = new RolePermission();
+                        rolePermission.setPermissionId(permissionInfo.getResourceId());
+                        rolePermission.setRoleId(roleId);
+                        rolePermissionService.deleteByResourceId(rolePermission);
                     }
                 }
             }
@@ -186,6 +193,16 @@ public class PermissionBusiness {
             e.printStackTrace();
         }
         //step1 根据角色id查询拥有的权限信息
+        List<PermissionInfo> permissionInfoList = permissionInfoService.queryList(new PermissionInfoQuery());
+        if( permissionInfoList.size() > 0 ){
+            for( PermissionInfo permissionInfo : permissionInfoList ){
+                Znode znode = new Znode();
+                znode.setpId(permissionInfo.getParentId());
+                znode.setId(permissionInfo.getResourceId());
+                znode.setName(permissionInfo.getName());
+                znodeList.add(znode);
+            }
+        }
         List<PermissionInfo> adminPermissionInfoList = this.getPermissionByRoleId(roleId);
         //admin拥有的权限为选中状态
         for( Znode znode : znodeList ){

@@ -27,8 +27,8 @@ public class RolePermissionServiceImpl extends BaseServiceImpl<RolePermission,In
 	private RolePermissionMapper rolePermissionMapper;
 
 	@Override
-	public void deleteByResourceId(String resouceId) {
-		rolePermissionMapper.deleteByResourceId(resouceId);
+	public void deleteByResourceId( RolePermission rolePermission) {
+		rolePermissionMapper.deleteByResourceId(rolePermission);
 	}
 
 	public List<RolePermission> queryList(RolePermissionQuery rolePermissionQuery){

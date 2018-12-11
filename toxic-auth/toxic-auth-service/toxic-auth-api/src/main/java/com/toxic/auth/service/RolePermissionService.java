@@ -23,5 +23,5 @@ public interface RolePermissionService extends BaseService<RolePermission, Integ
 
 	Page<RolePermission> queryListPage(RolePermissionQuery rolePermissionQuery, Page<RolePermission> page);
 
-	void deleteByResourceId(String resouceId);
+	void deleteByResourceId(RolePermission rolePermission);
 }
